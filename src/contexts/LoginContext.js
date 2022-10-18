@@ -11,4 +11,4 @@ export function LoginContextProvider({ children }) {
             {children}
         </LoginContext.Provider>
     )
-};
+}

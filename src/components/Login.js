@@ -3,25 +3,41 @@ import Logo from "../assets/images/logoTrackIt.svg";
 import { postUser } from "../services/POST";
 import styled from 'styled-components';
 import { useContext } from "react";
+import { useNavigate } from "react-router-dom";
 
 const LoginPage = ({ children }) => {
-    const { user, disabled, setDisabled } = useContext(LoginContext);
+    const { user, setUser, disabled, setDisabled } = useContext(LoginContext);
+    const navigate = useNavigate();
 
     function submitUser(e) {
         e.preventDefault();
         console.log(user);
 
-        setDisabled(!disabled)
+        setDisabled(true);
 
-            (e.target.length === 3)
-            ? postUser("login", user)
-            : postUser("sign-up", user)
-
-    };
+        (e.target.length === 3) ? (
+            postUser("login", user)
+                .then(ans => {
+                    setDisabled(!disabled);
+                    setUser({ ...user, id: ans.data.id, config: { headers: { "Authorization": `Bearer ${ans.data.token}` } } })
+                    navigate("/habitos");
+                })
+        ) : (
+            postUser("sign-up", user)
+                .then(() => {
+                    setDisabled(false);
+                    navigate("/");
+                })
+                .catch(err => {
+                    alert(err.response.data.details);
+                    setDisabled(false);
+                })
+        )
+    }
 
     return (
         <Login>
-            <img src={Logo} />
+            <img src={Logo} alt="Logo-TrackIt" />
             <Form onSubmit={submitUser}>
                 {children}
             </Form>
@@ -86,10 +102,6 @@ const Form = styled.form`
 
         &:hover {
             background: #40AEFE;
-        }
-
-        &:disabled {
-            opacity: 0.7;
         }
     }
 `;

@@ -1,12 +1,16 @@
-import { useContext, useState } from "react";
+import { useContext, useEffect } from "react";
 
 import { LoginContext } from "../../contexts/LoginContext";
 import LoginPage from "../../components/Login";
 import { useNavigate } from "react-router-dom";
 
 const SignIn = () => {
-    const { user, setUser, disabled } = useContext(LoginContext);
+    const { user, setUser, disabled, setDisabled } = useContext(LoginContext);
     const navigate = useNavigate();
+
+    useEffect(() => {
+        setDisabled(false);
+    }, [])
 
     return (
         <LoginPage>
