@@ -18,6 +18,7 @@ const Header = () => {
 const Container = styled.header`
     display: flex;
     position: fixed;
+    z-index: 1;
     top: 0;
     justify-content: space-between;
     align-items: center;

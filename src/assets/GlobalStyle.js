@@ -55,8 +55,9 @@ export const GlobalStyle = createGlobalStyle`
         display: flex;
         justify-content: center;
         width: 100vw;
-        height: 100vh;
+        min-height: 100vh;
         color: #000;
+        overflow-y: scroll;
         font-weight: 400;
         font-family: 'Lexend Deca', sans-serif;
         background-color: #FFF;

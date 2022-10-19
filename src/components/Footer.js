@@ -20,6 +20,7 @@ const Container = styled.footer`
     width: 375px;
     height: 70px;
     background: #FFF;
+    border: 1px solid #fafafa;
 
     div {
         position: relative;
