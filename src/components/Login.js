@@ -1,8 +1,9 @@
+import { useContext, useEffect, useState } from "react";
+
 import { LoginContext } from "../contexts/LoginContext";
 import Logo from "../assets/images/logoTrackIt.svg";
 import { postUser } from "../services/POST";
 import styled from 'styled-components';
-import { useContext } from "react";
 import { useNavigate } from "react-router-dom";
 
 const LoginPage = ({ children }) => {
@@ -14,7 +15,7 @@ const LoginPage = ({ children }) => {
 
         setDisabled(true);
 
-        (e.target.length === 3) ? (
+        if (e.target.length === 3) {
             postUser("login", user)
                 .then(ans => {
                     setDisabled(!disabled);
@@ -28,17 +29,18 @@ const LoginPage = ({ children }) => {
                             id: ans.data.id,
                             config: {
                                 headers: {
-                                    "Authorization": `Bearer ${ans.data.token}`
+                                    Authorization: `Bearer ${ans.data.token}`
                                 }
                             }
                         })
-                    navigate("/habitos");
+                    navigate("/habitos")
                 })
                 .catch(err => {
-                    alert(err.response.data.details);
+                    console.log(err)
+                    alert(err);
                     setDisabled(false);
                 })
-        ) : (
+        } else {
             postUser("sign-up", user)
                 .then(() => {
                     setDisabled(false);
@@ -48,7 +50,7 @@ const LoginPage = ({ children }) => {
                     alert(err.response.data.details);
                     setDisabled(false);
                 })
-        )
+        }
     }
 
     return (
