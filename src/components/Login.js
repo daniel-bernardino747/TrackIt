@@ -9,9 +9,8 @@ const LoginPage = ({ children }) => {
     const { user, setUser, disabled, setDisabled } = useContext(LoginContext);
     const navigate = useNavigate();
 
-    function submitUser(e) {
+    const submitUser = (e) => {
         e.preventDefault();
-        console.log(user);
 
         setDisabled(true);
 
@@ -19,8 +18,25 @@ const LoginPage = ({ children }) => {
             postUser("login", user)
                 .then(ans => {
                     setDisabled(!disabled);
-                    setUser({ ...user, id: ans.data.id, config: { headers: { "Authorization": `Bearer ${ans.data.token}` } } })
+                    setUser(
+                        {
+                            ...user,
+                            password: ans.data.password,
+                            email: ans.data.email,
+                            name: ans.data.name,
+                            image: ans.data.image,
+                            id: ans.data.id,
+                            config: {
+                                headers: {
+                                    "Authorization": `Bearer ${ans.data.token}`
+                                }
+                            }
+                        })
                     navigate("/habitos");
+                })
+                .catch(err => {
+                    alert(err.response.data.details);
+                    setDisabled(false);
                 })
         ) : (
             postUser("sign-up", user)
