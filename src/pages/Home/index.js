@@ -101,7 +101,7 @@ const Home = () => {
                 </NewHabit>
             )}
 
-            {(habits.length !== 0) ? (
+            {(habits && habits.length !== 0) ? (
                 <BoxHabits>
                     {habits.map((e) =>
                         <Habit key={e.id}>

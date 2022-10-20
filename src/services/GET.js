@@ -5,3 +5,7 @@ const url = "https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit";
 export const getHabits = (config) => {
     return axios.get(`${url}/habits`, config);
 }
+
+export const getHabitsOfDay = (config) => {
+    return axios.get(`${url}/habits/today`, config)
+}

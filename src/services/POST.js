@@ -11,3 +11,7 @@ export const createHabit = (body, config) => {
     const promise = axios.post(`${url}/habits`, body, config);
     return promise;
 }
+
+export const toggleDoneHabit = (endURL, body, config) => {
+    return axios.post(`${url}/habits/${endURL}`, body, config);
+}

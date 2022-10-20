@@ -1,13 +1,16 @@
 import { GlobalStyle } from "../../assets/GlobalStyle";
 import { LoginContextProvider } from "../../contexts/LoginContext";
 import { Outlet } from "react-router-dom";
+import { ProgressContextProvider } from "../../contexts/ProgressContext";
 
 const Root = () => {
     return (
         <>
             <GlobalStyle />
             <LoginContextProvider>
-                <Outlet />
+                <ProgressContextProvider>
+                    <Outlet />
+                </ProgressContextProvider>
             </LoginContextProvider>
         </>
     );

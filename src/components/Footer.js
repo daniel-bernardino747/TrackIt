@@ -1,13 +1,16 @@
 import styled from 'styled-components';
+import { useNavigate } from 'react-router-dom';
 
 const Footer = () => {
+    const navigate = useNavigate();
+
     return (
         <Container>
-            <Option>Hábitos</Option>
+            <Option onClick={() => navigate("/habitos")}>Hábitos</Option>
             <div>
-                <MainOption>Hoje</MainOption>
+                <MainOption onClick={() => navigate("/hoje")}>Hoje</MainOption>
             </div>
-            <Option>Histórico</Option>
+            <Option onClick={() => navigate("/historico")}>Histórico</Option>
         </Container>
     );
 }
