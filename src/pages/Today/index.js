@@ -24,7 +24,7 @@ const Today = () => {
                 setHabitsToday(ans.data);
             })
             .catch(err => console.log(err))
-    }, [bla])
+    }, [bla, []])
 
 
     useEffect(() => {
@@ -32,13 +32,14 @@ const Today = () => {
     }, [habitsToday])
 
     const toggleHabit = (habit) => {
-        setBla(!bla);
+
 
         if (habit.done) {
             console.log("checked")
             toggleDoneHabit(`${habit.id}/uncheck`, habit, user.config)
                 .then(ans => {
                     console.log("ans =>", ans)
+                    setBla(!bla);
                 })
                 .catch(err => console.log(err))
         } else {
@@ -46,6 +47,7 @@ const Today = () => {
             toggleDoneHabit(`${habit.id}/check`, habit, user.config)
                 .then(ans => {
                     console.log("ans =>", ans)
+                    setBla(!bla);
                 })
                 .catch(err => console.log(err))
         }
@@ -65,12 +67,14 @@ const Today = () => {
 
             {habitsToday && (
                 <HabitsToDo>
-                    {habitsToday.map((h) =>
+                    {habitsToday.map((h, i) =>
                         <HabitToDo key={h.id}>
                             <div>
                                 <h1>{h.name}</h1>
-                                <p>Sequencia atual: <span>{h.currentSequence} dias</span></p>
-                                <p>Seu recorde: <span>{h.highestSequence} dias</span></p>
+                                <p>
+                                    Sequencia atual: <Span green={h.done}> {h.currentSequence} dias</Span>
+                                </p>
+                                <p>Seu recorde: <Span green={(h.currentSequence === h.highestSequence && h.highestSequence !== 0)}>{h.highestSequence} dias</Span></p>
                             </div>
                             <CheckHabit done={h.done} onClick={() => toggleHabit(h)}>
                                 <img src={checkIcon} />
@@ -140,10 +144,10 @@ const HabitToDo = styled.div`
         color: #666;
         margin-bottom: 4px;
     }
+`;
 
-    span {
-        color: ${props => props.green ? "#8FC549" : "color: #666"};
-    }
+const Span = styled.span`
+    color: ${props => props.green ? "#8FC549" : "#666"};
 `;
 
 const CheckHabit = styled.div`

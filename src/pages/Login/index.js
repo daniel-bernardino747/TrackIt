@@ -17,6 +17,7 @@ const Login = () => {
 
     return (
         <LoginPage>
+
             <input
                 type="text" value={user.email} placeholder="email"
                 onChange={e =>
@@ -49,8 +50,8 @@ const Login = () => {
 
 
             <p onClick={() => {
-                navigate("/cadastro");
                 setUser({ email: "", password: "", name: "", image: "" });
+                navigate("/cadastro");
             }}>
                 Não tem uma conta? Cadastre-se!
             </p>

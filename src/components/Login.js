@@ -33,7 +33,7 @@ const LoginPage = ({ children }) => {
                                 }
                             }
                         })
-                    navigate("/habitos")
+                    navigate("/hoje")
                 })
                 .catch(err => {
                     console.log(err)
