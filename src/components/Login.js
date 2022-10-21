@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from "react";
+import { useContext, useMemo, useState } from "react";
 
 import { LoginContext } from "../contexts/LoginContext";
 import Logo from "../assets/images/logoTrackIt.svg";
@@ -8,7 +8,10 @@ import { useNavigate } from "react-router-dom";
 
 const LoginPage = ({ children }) => {
     const { user, setUser, disabled, setDisabled } = useContext(LoginContext);
+    const [bla, setBla] = useState(false)
     const navigate = useNavigate();
+
+    useMemo(() => navigate("/hoje"), [bla])
 
     const submitUser = (e) => {
         e.preventDefault();
@@ -33,7 +36,7 @@ const LoginPage = ({ children }) => {
                                 }
                             }
                         })
-                    navigate("/hoje")
+                    setBla(!bla);
                 })
                 .catch(err => {
                     console.log(err)

@@ -10,21 +10,21 @@ import styled from 'styled-components';
 import { toggleDoneHabit } from '../../services/POST';
 
 const Today = () => {
-    const { dateToday, habitsToday, setHabitsToday } = useContext(ProgressContext);
+    const { dateToday, habitsToday, setHabitsToday, progressPorcentage, setProgressPorcentage } = useContext(ProgressContext);
     const { user } = useContext(LoginContext);
-    const [progressPorcentage, setProgressPorcentage] = useState(0);
     const [bla, setBla] = useState(false);
 
     console.log("habitsToday => ", habitsToday)
     console.log("user => ", user)
 
     useEffect(() => {
+        console.log('uma vez', user.config)
         getHabitsOfDay(user.config)
             .then(ans => {
                 setHabitsToday(ans.data);
             })
             .catch(err => console.log(err))
-    }, [bla, []])
+    }, [bla])
 
 
     useEffect(() => {
@@ -32,8 +32,6 @@ const Today = () => {
     }, [habitsToday])
 
     const toggleHabit = (habit) => {
-
-
         if (habit.done) {
             console.log("checked")
             toggleDoneHabit(`${habit.id}/uncheck`, habit, user.config)
@@ -123,11 +121,12 @@ const HabitsToDo = styled.div`
 
 const HabitToDo = styled.div`
     width: 340px;
-    height: 94px;
+    min-height: 94px;
     border-radius: 5px;
     background: #FFF;
     display: flex;
     justify-content: space-between;
+    align-items: center;
 
     div {
         padding: 15px;
@@ -152,6 +151,7 @@ const Span = styled.span`
 
 const CheckHabit = styled.div`
     width: 69px;
+    height: 69px;
     margin: 13px;
     background: ${props => props.done ? "#8FC549" : "#EBEBEB"};
     border-radius: 5px;

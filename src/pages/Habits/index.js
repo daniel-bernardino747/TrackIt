@@ -1,15 +1,19 @@
+import { getHabits, getHabitsOfDay } from "../../services/GET";
 import { useContext, useEffect, useState } from "react";
 
 import Footer from "../../components/Footer";
 import Header from "../../components/Header";
 import { LoginContext } from "../../contexts/LoginContext";
+import { ProgressContext } from "../../contexts/ProgressContext";
+import { ThreeDots } from "react-loader-spinner";
 import TrashIcon from '../../assets/images/trashIcon.svg';
 import { createHabit } from "../../services/POST";
-import { getHabits } from "../../services/GET";
+import { deleteHabitRequest } from "../../services/DELETE";
 import styled from 'styled-components';
 
-const Home = () => {
-    const { user } = useContext(LoginContext);
+const Habits = () => {
+    const { user, disabled, setDisabled } = useContext(LoginContext);
+    const { habitsToday, setHabitsToday, progressPorcentage, setProgressPorcentage } = useContext(ProgressContext)
     const [habits, setHabits] = useState(undefined);
     const [newHabit, setNewHabit] = useState(false);
     const [titleHabit, setTitleHabit] = useState("");
@@ -23,7 +27,26 @@ const Home = () => {
         { id: 5, day: "S", selected: false },
         { id: 6, day: "S", selected: false }]);
 
+    const [bla, setBla] = useState(false)
+
     console.log('habits => ', habits)
+
+    useEffect(() => {
+        console.log('uma vez', user.config)
+        getHabitsOfDay(user.config)
+            .then(ans => {
+                setHabitsToday(ans.data);
+            })
+            .catch(err => console.log(err))
+    }, [bla])
+
+    useEffect(() => {
+        setProgressPorcentage((habitsToday.filter(e => e.done === true).length / habitsToday.length) * 100)
+    }, [habitsToday])
+
+    useEffect(() => {
+        setDisabled(false)
+    }, [])
 
     useEffect(() => {
         getHabits(user.config)
@@ -33,7 +56,7 @@ const Home = () => {
             .catch(err => {
                 console.log(err);
             });
-    }, [user, habits])
+    }, [user, bla])
 
     const markDay = (index) => {
 
@@ -50,11 +73,13 @@ const Home = () => {
         setDaysHabit(newDaysHabits)
     }
 
-    const cleanAndClose = () => {
+    const clearAndClose = () => {
         setTitleHabit("");
         setNewHabit(false);
         const newDays = days.map(e => { return { ...e, selected: false } });
         setDays(newDays);
+        setBla(!bla);
+        setDisabled(false)
     }
 
     const saveHabit = () => {
@@ -62,12 +87,32 @@ const Home = () => {
             name: titleHabit,
             days: daysHabit
         }
+
+        setDisabled(true);
+
         createHabit(body, user.config)
-            .then(ans => console.log(ans))
+            .then(ans => {
+                console.log(ans)
+                clearAndClose();
+            })
             .catch(err => {
                 console.log(err);
-                alert(err)
+                setDisabled(false)
+                alert(err.response.data.details)
+            });
+
+    }
+
+    const removeHabit = (id) => {
+        console.log("removed habit")
+
+        deleteHabitRequest(id, user.config)
+            .then(ans => {
+                console.log(ans)
+                setBla(!bla);
             })
+            .catch(err => console.log(err));
+
     }
 
     return (
@@ -82,23 +127,41 @@ const Home = () => {
 
 
             {newHabit && (
-                <NewHabit>
-                    <input
-                        value={titleHabit}
-                        placeholder="nome do hábito"
-                        onChange={(e) =>
-                            setTitleHabit(e.target.value)}
-                        type="text" />
-                    <DaysOfWeek>
-                        {days.map((e, i) =>
-                            <Day key={i} handleDay={e.selected} onClick={() => markDay(e.id)}>{e.day}</Day>
-                        )}
-                    </DaysOfWeek>
-                    <ButtonsBox>
-                        <CancelButton onClick={cleanAndClose}>Cancelar</CancelButton>
-                        <SaveButton onClick={saveHabit}>Salvar</SaveButton>
-                    </ButtonsBox>
-                </NewHabit>
+                <>
+                    <NewHabit>
+                        <input
+                            value={titleHabit}
+                            placeholder="nome do hábito"
+                            onChange={(e) =>
+                                setTitleHabit(e.target.value)}
+                            type="text"
+                            disabled={disabled} />
+                        <DaysOfWeek>
+                            {days.map((e, i) =>
+                                <Day key={i} handleDay={e.selected} onClick={() => markDay(e.id)} disabled={disabled}>{e.day}</Day>
+                            )}
+                        </DaysOfWeek>
+                        <ButtonsBox>
+                            <CancelButton onClick={clearAndClose}>Cancelar</CancelButton>
+                            {disabled ? (
+                                <Loader>
+                                    <ThreeDots
+                                        height="40"
+                                        width="40"
+                                        radius="9"
+                                        color="#FFF"
+                                        ariaLabel="three-dots-loading"
+                                        wrapperStyle={{}}
+                                        wrapperClassName=""
+                                        visible={true} />
+                                </Loader>
+                            ) : (
+                                <SaveButton onClick={saveHabit}>Salvar</SaveButton>
+                            )}
+                        </ButtonsBox>
+                    </NewHabit>
+                    <Overlay onClick={clearAndClose} />
+                </>
             )}
 
             {(habits && habits.length !== 0) ? (
@@ -108,15 +171,10 @@ const Home = () => {
                             <h1>{e.name}</h1>
                             <DaysOfWeek>
                                 {days.map((d) =>
-                                    <HabitDay
-                                        key={d.id}
-                                        id={d.id}
-                                        letterDay={d.day}
-                                        idDayToHabit={e.days}
-                                    />
+                                    <OneHabit key={d.id} handleDay={e.days.includes(d.id)} small>{d.day}</OneHabit>
                                 )}
                             </DaysOfWeek>
-                            <RemoveHabit src={TrashIcon} alt="trash" />
+                            <RemoveHabit onClick={() => removeHabit(e.id)} src={TrashIcon} alt="trash" />
                         </Habit>
                     )}
                 </BoxHabits>
@@ -131,19 +189,6 @@ const Home = () => {
 
             <Footer />
         </Container>
-    );
-};
-
-const HabitDay = (props) => {
-    const { id, letterDay, idDayToHabit } = props;
-    return (
-        <>
-            {(idDayToHabit.includes(id)) ? (
-                <OneHabit key={id} handleDay={true}>{letterDay}</OneHabit>
-            ) : (
-                <OneHabit key={id} handleDay={false}>{letterDay}</OneHabit>
-            )}
-        </>
     );
 };
 
@@ -180,6 +225,19 @@ const CreateHabit = styled.div`
     }
 `;
 
+const Loader = styled.div`
+    display: flex;
+    opacity: 0.7;
+    justify-content: center ;
+    align-items: center;
+    background: #52B6FF;
+
+    width: 84px;
+    height: 35px;
+    border-radius: 5px;
+    border: none;
+`;
+
 const AlertHabit = styled.div`
     margin: 0 20px;
     color: #666;
@@ -197,6 +255,7 @@ const NewHabit = styled.div`
     align-items: center;
     flex-direction: column;
     margin-bottom: 30px;
+    z-index: 2;
 
     input[type="text"] {
         border: 1px solid #D5D5D5;
@@ -211,6 +270,16 @@ const NewHabit = styled.div`
             color: #D5D5D5;
         }
     }
+`;
+
+const Overlay = styled.div`
+    z-index: 1;
+    background: rgb(0, 0, 0, 0.2);
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
 `;
 
 const DaysOfWeek = styled.div`
@@ -229,6 +298,8 @@ const Day = styled.button`
     color: ${props => props.handleDay ? "#FFF" : "#D5D5D5"};
     font-size: 20px;
 
+    pointer-events: ${props => props.disabled ? "none" : "default"};
+
     &:hover {
         background: #F0F0F0;
     }
@@ -245,6 +316,7 @@ const ButtonsBox = styled.div`
     position: absolute;
     right: 17px;
     bottom: 15px;
+    display: flex;
 `;
 
 const SaveButton = styled.button`
@@ -275,10 +347,11 @@ const CancelButton = styled(SaveButton)`
 const Habit = styled.div`
     position: relative; 
     width: 340px;
-    height: 91px;
+    min-height: 91px;
     background: #FFF;
     border-radius: 5px;
     margin-bottom: 10px;
+    padding-right: 30px;
 
     h1 {
         font-size: 20px;
@@ -301,4 +374,4 @@ const RemoveHabit = styled.img`
     cursor: pointer;
 `;
 
-export default Home;
+export default Habits;

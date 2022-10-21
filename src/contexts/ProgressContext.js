@@ -8,6 +8,7 @@ export function ProgressContextProvider({ children }) {
 
     const daysOfWeek = ["Domingo", "Segunda", "Terça", "Quarta", "Quinta", "Sexta", "Sábado"];
     const [habitsToday, setHabitsToday] = useState([]);
+    const [progressPorcentage, setProgressPorcentage] = useState(0);
     const dayOfWeek = daysOfWeek[dayjs().day()]
 
     const todayDate = dayjs().format("DD/MM")
@@ -18,7 +19,7 @@ export function ProgressContextProvider({ children }) {
     });
 
     return (
-        <ProgressContext.Provider value={{ dateToday, habitsToday, setHabitsToday }}>
+        <ProgressContext.Provider value={{ dateToday, habitsToday, setHabitsToday, progressPorcentage, setProgressPorcentage }}>
             {children}
         </ProgressContext.Provider>
     )

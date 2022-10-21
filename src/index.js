@@ -1,7 +1,7 @@
 import { Route, RouterProvider, createBrowserRouter, createRoutesFromElements } from "react-router-dom";
 
+import Habits from "./pages/Habits";
 import Historic from "./pages/Historic";
-import Home from "./pages/Home";
 import Login from "./pages/Login";
 import React from "react";
 import ReactDOM from "react-dom/client";
@@ -16,7 +16,7 @@ const router = createBrowserRouter(
       <Route element={<Login />} index />
       <Route element={<SignIn />} path="/cadastro" />
 
-      <Route element={<Home />} path="/habitos" />
+      <Route element={<Habits />} path="/habitos" />
       <Route element={<Today />} path="/hoje" />
       <Route element={<Historic />} path="/historico" />
 
