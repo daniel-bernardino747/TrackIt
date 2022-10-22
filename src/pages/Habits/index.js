@@ -13,7 +13,7 @@ import styled from 'styled-components';
 
 const Habits = () => {
     const { user, disabled, setDisabled } = useContext(LoginContext);
-    const { habitsToday, setHabitsToday, progressPorcentage, setProgressPorcentage } = useContext(ProgressContext)
+    const { habitsToday, setHabitsToday, setProgressPorcentage } = useContext(ProgressContext)
     const [habits, setHabits] = useState(undefined);
     const [newHabit, setNewHabit] = useState(false);
     const [titleHabit, setTitleHabit] = useState("");
@@ -142,7 +142,7 @@ const Habits = () => {
                             )}
                         </DaysOfWeek>
                         <ButtonsBox>
-                            <CancelButton onClick={clearAndClose}>Cancelar</CancelButton>
+                            <CancelButton onClick={() => setNewHabit(!newHabit)}>Cancelar</CancelButton>
                             {disabled ? (
                                 <Loader>
                                     <ThreeDots
@@ -160,7 +160,7 @@ const Habits = () => {
                             )}
                         </ButtonsBox>
                     </NewHabit>
-                    <Overlay onClick={clearAndClose} />
+                    <Overlay onClick={() => setNewHabit(!newHabit)} />
                 </>
             )}
 

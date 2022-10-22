@@ -17,6 +17,7 @@ const Today = () => {
     console.log("habitsToday => ", habitsToday)
     console.log("user => ", user)
 
+
     useEffect(() => {
         console.log('uma vez', user.config)
         getHabitsOfDay(user.config)
@@ -25,7 +26,6 @@ const Today = () => {
             })
             .catch(err => console.log(err))
     }, [bla])
-
 
     useEffect(() => {
         setProgressPorcentage((habitsToday.filter(e => e.done === true).length / habitsToday.length) * 100)
@@ -56,7 +56,7 @@ const Today = () => {
             <Header />
             <ProgressDay>
                 <h1>{dateToday.dayWeek}, {dateToday.date}</h1>
-                {habitsToday.length !== 0 ? (
+                {(!isNaN(progressPorcentage) && progressPorcentage !== 0) ? (
                     <Subtitle green>{Math.round(progressPorcentage)}% dos hábitos concluídos</Subtitle>
                 ) : (
                     <Subtitle>Nenhum hábito concluído ainda</Subtitle>
@@ -72,7 +72,7 @@ const Today = () => {
                                 <p>
                                     Sequencia atual: <Span green={h.done}> {h.currentSequence} dias</Span>
                                 </p>
-                                <p>Seu recorde: <Span green={(h.currentSequence === h.highestSequence && h.highestSequence !== 0)}>{h.highestSequence} dias</Span></p>
+                                <p>Seu recorde: <Span green={(h.currentSequence === h.highestSequence && h.done)}>{h.highestSequence} dias</Span></p>
                             </div>
                             <CheckHabit done={h.done} onClick={() => toggleHabit(h)}>
                                 <img src={checkIcon} />
