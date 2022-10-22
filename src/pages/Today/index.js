@@ -1,3 +1,4 @@
+import { CheckHabit, Container, HabitToDo, HabitsToDo, ProgressDay, Span, Subtitle } from './style'
 import { useContext, useEffect, useState } from 'react';
 
 import Footer from '../../components/Footer';
@@ -6,7 +7,6 @@ import { LoginContext } from '../../contexts/LoginContext';
 import { ProgressContext } from '../../contexts/ProgressContext';
 import checkIcon from '../../assets/images/checkIcon.svg';
 import { getHabitsOfDay } from '../../services/GET';
-import styled from 'styled-components';
 import { toggleDoneHabit } from '../../services/POST';
 
 const Today = () => {
@@ -86,90 +86,5 @@ const Today = () => {
         </Container>
     );
 };
-
-const Container = styled.section`
-    width: 375px;
-    min-height: 100vh;
-    background: #E5E5E5;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-`;
-const ProgressDay = styled.div`
-    padding: 100px 20px 20px 20px;
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-    gap: 5px;
-    
-    h1 {
-        font-size: 23px;
-        color: #126BA5;
-    }
-`;
-
-const Subtitle = styled.p`
-    color: ${props => props.green ? "#8FC549" : "#BABABA"}; 
-    font-size: 18px;
-`;
-
-const HabitsToDo = styled.div`
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-`;
-
-const HabitToDo = styled.div`
-    width: 340px;
-    min-height: 94px;
-    border-radius: 5px;
-    background: #FFF;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-
-    div {
-        padding: 15px;
-    }
-
-    h1 {
-        font-size: 20px;
-        color: #666;
-        margin-bottom: 8px;
-    }
-
-    p {
-        font-size: 13px;
-        color: #666;
-        margin-bottom: 4px;
-    }
-`;
-
-const Span = styled.span`
-    color: ${props => props.green ? "#8FC549" : "#666"};
-`;
-
-const CheckHabit = styled.div`
-    width: 69px;
-    height: 69px;
-    margin: 13px;
-    background: ${props => props.done ? "#8FC549" : "#EBEBEB"};
-    border-radius: 5px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    &:hover {
-        opacity: 0.8;
-    }
-
-    &:active {
-        background: green;
-    }
-
-    img {
-        width: 35px;
-    }
-`;
 
 export default Today;

@@ -1,9 +1,8 @@
 import { useContext, useEffect } from "react";
 
+import Loader from "../../components/Loader";
 import { LoginContext } from "../../contexts/LoginContext";
 import LoginPage from "../../components/Login";
-import { ThreeDots } from "react-loader-spinner";
-import styled from 'styled-components';
 import { useNavigate } from "react-router-dom";
 
 const SignIn = () => {
@@ -39,17 +38,7 @@ const SignIn = () => {
                 } disabled={disabled} />
 
             {disabled ? (
-                <Loader>
-                    <ThreeDots
-                        height="80"
-                        width="80"
-                        radius="9"
-                        color="#FFF"
-                        ariaLabel="three-dots-loading"
-                        wrapperStyle={{}}
-                        wrapperClassName=""
-                        visible={true} />
-                </Loader>
+                <Loader />
             ) : (
                 <input
                     type="submit"
@@ -66,17 +55,5 @@ const SignIn = () => {
         </LoginPage>
     );
 };
-
-const Loader = styled.div`
-    display: flex;
-    opacity: 0.7;
-    justify-content: center ;
-    align-items: center;
-    width: 303px;
-    height: 45px;
-    border-radius: 5px;
-    background: #52B6FF;
-`;
-
 
 export default SignIn;
