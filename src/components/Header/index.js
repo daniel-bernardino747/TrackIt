@@ -1,4 +1,4 @@
-import { LoginContext } from '../contexts/LoginContext';
+import { LoginContext } from '../../contexts/LoginContext';
 import styled from 'styled-components';
 import { useContext } from 'react';
 
