@@ -15,7 +15,10 @@ const CreateHabit = styled.div`
     width: 100%;
     padding: 6.25em 1.25em 1.25em 1.25em;
     color: ${COLOR.headerAndTitle};
-    font-size: 1em;
+    
+    h1 {
+        font-size: 1.4375em;
+    }
 
     button {
         width: 2.5em;

@@ -21,6 +21,9 @@ const TitleHistoric = styled.div`
     padding: 6.25em 1.25em 1.25em 1.25em;
     color: ${COLOR.headerAndTitle};
 
+    p {
+        font-size: 1.4375em;
+    }
 `;
 
 export { Container, Message, TitleHistoric };
