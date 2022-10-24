@@ -35,6 +35,8 @@ const NewHabit = ({ days, setDays, reload, setReload, setNewHabit, newHabit }) =
             days: daysHabit
         }
 
+        body.days.length === 0 && alert('Nenhum dia selecionado');
+
         setDisabled(true);
 
         createHabit(body, user.config)

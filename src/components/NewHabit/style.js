@@ -15,8 +15,8 @@ const CreateOneHabit = styled.div`
 `;
 
 const Input = styled.input.attrs({ type: "text" })`
-    width: 19.0625em;
-    height: 2.8125em;
+    width: 15.15em;
+    height: 2.25em;
     margin-top: 1.125em;
     padding-left: 0.625em;
     border: 0.0625em solid ${COLOR.borderInput};
@@ -36,8 +36,8 @@ const DaysOfWeek = styled.div`
 `;
 
 const Day = styled.button`
-    width: 1.875em;
-    height: 1.875em;
+    width: 1.5em;
+    height: 1.5em;
     border: 0.0625em solid ${COLOR.borderInput};
     border-radius: 0.3125em;
     color: ${props => props.handleDay ? COLOR.bgWhite : COLOR.daySelected};

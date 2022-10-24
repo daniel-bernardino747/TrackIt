@@ -25,6 +25,7 @@ const Form = styled.form`
         height: 2.8125em;
         border-radius: 0.3125em;
         font-size: 1.25em;
+        padding: 0 0.5em;
     }
 
     p {
