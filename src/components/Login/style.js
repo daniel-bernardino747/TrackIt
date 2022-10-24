@@ -1,15 +1,16 @@
+import { COLOR } from '../../constants/Colors';
 import styled from 'styled-components';
 
 const Login = styled.section`
-    width: 375px;
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin: 68px 0;
-    gap: 20px;
+    width: 23.4375em;
+    margin: 4.25em 0;
+    gap: 1.25em;
 
     img {
-        width: 180px;
+        width: 11.25em;
     }
 `;
 
@@ -17,19 +18,19 @@ const Form = styled.form`
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 6px;
+    gap: 0.375em;
 
     input {
-        width: 303px;
-        height: 45px;
-        border-radius: 5px;
-        font-size: 20px;
+        width: 18.9375em;
+        height: 2.8125em;
+        border-radius: 0.3125em;
+        font-size: 1.25em;
     }
 
     p {
-        margin: 20px 0;
-        color: #52B6FF;
-        font-size: 14px;
+        margin: 1.25em 0;
+        color: ${COLOR.bgButton};
+        font-size: 0.875em;
         text-align: center;
         text-decoration: underline;
         cursor: pointer;
@@ -37,26 +38,26 @@ const Form = styled.form`
 
     input[type="text"],
     input[type="password"] {
-        border: 1px solid #D5D5D5;
-        background-color: #FFF;
+        border: 1px solid ${COLOR.borderInput};
+        background-color: ${COLOR.bgWhite};
 
         &::placeholder {
-            color: #DBDBDB;
+            color: ${COLOR.daySelected};
         }
 
         &:disabled {
-            background: #F2F2F2;
-            color: #AFAFAF;
+            color: ${COLOR.textDisabled};
+            background: ${COLOR.bgGray};
         }
     }
 
     input[type="submit"] {
         border: none;
-        color: #FFF;
-        background: #52B6FF;
+        color: ${COLOR.bgWhite};
+        background: ${COLOR.bgButton};
 
         &:hover {
-            background: #40AEFE;
+            background: ${COLOR.hoverButton};
         }
     }
 `;

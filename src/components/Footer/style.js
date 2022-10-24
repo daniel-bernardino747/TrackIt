@@ -1,3 +1,4 @@
+import { COLOR } from '../../constants/Colors';
 import styled from 'styled-components';
 
 const Container = styled.footer`
@@ -5,10 +6,10 @@ const Container = styled.footer`
     position: fixed;
     bottom: 0;
     justify-content: space-around;
-    width: 375px;
-    height: 70px;
-    background: #FFF;
-    border: 1px solid #fafafa;
+    width: 23.4375em;
+    height: 4.375em;
+    border: 0.0625em solid ${COLOR.bgGray};
+    background: ${COLOR.bgWhite};
 
     div {
         position: relative;
@@ -19,34 +20,34 @@ const Option = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 150px;
+    width: 9.375em;
     height: 100%;
-    border-radius: 40px;
-    color: #52B6FF;
-    font-size: 18px;
+    border-radius: 2.5em;
+    color: ${COLOR.bgButton};
+    font-size: 1.125em;
     cursor: pointer;
     
     &:hover {
-        color: #3E9ADE;
+        color: ${COLOR.hoverButton};
     }
 `;
 
 const MainOption = styled.div`
     display: flex;
     position: absolute;
-    bottom: 35px;
+    bottom: 2.1875em;
     justify-content: center;
     align-items: center;
-    width: 90px;
-    height: 90px;
-    border-radius: 90px;
-    color: #FFF;
+    width: 5.625em;
+    height: 5.625em;
+    padding: 0.3125em;
+    border-radius: 5.625em;
+    color: ${COLOR.bgWhite};
     cursor: pointer;
-    background: #52B6FF;
-    padding: 5px;
+    background: ${COLOR.bgButton};
     
     &:hover {
-        background: #3E9ADE;
+        background: ${COLOR.hoverButton};
     }
 `;
 

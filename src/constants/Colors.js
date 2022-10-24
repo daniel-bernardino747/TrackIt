@@ -1,0 +1,16 @@
+export const COLOR = {
+    borderInput: "rgb(212,212,212)",
+    bgButton: "rgb(82,182,255)",
+    bgGray: "rgb(242,242,242)",
+    bgGreen: "rgb(143,197,73)",
+    bgSubtitle: "rgb(186,186,186)",
+    bgUnchecked: "rgb(235,235,235)",
+    bgWhite: "rgb(255,255,255)",
+    daySelected: "rgb(207,207,207)",
+    headerAndTitle: "rgb(18,107,165)",
+    hoverDay: "rgb(240,240,240)",
+    hoverButton: "rgb(62,154,222)",
+    overlay: "rgb(0, 0, 0, 0.2)",
+    text: "rgb(102,102,102)",
+    textDisabled: "rgb(175,175,175)",
+};

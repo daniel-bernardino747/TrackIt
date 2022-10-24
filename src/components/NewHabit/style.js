@@ -1,3 +1,4 @@
+import { COLOR } from '../../constants/Colors';
 import styled from 'styled-components';
 
 const CreateOneHabit = styled.div`
@@ -6,90 +7,90 @@ const CreateOneHabit = styled.div`
     position: relative;
     flex-direction: column;
     align-items: center;
-    width: 340px;
-    height: 180px;
-    margin-bottom: 30px;
-    border-radius: 5px;
-    background: #FFF;
+    width: 21.25em;
+    height: 11.25em;
+    margin-bottom: 1.875em;
+    border-radius: 0.3125em;
+    background: ${COLOR.bgWhite};
 `;
 
 const Input = styled.input.attrs({ type: "text" })`
-    width: 305px;
-    height: 45px;
-    margin-top: 18px;
-    padding-left: 10px;
-    border: 1px solid #D5D5D5;
-    border-radius: 5px;
-    font-size: 20px;
+    width: 19.0625em;
+    height: 2.8125em;
+    margin-top: 1.125em;
+    padding-left: 0.625em;
+    border: 0.0625em solid ${COLOR.borderInput};
+    border-radius: 0.3125em;
+    font-size: 1.25em;
 
     &::placeholder {
-        color: #D5D5D5;
+        color: ${COLOR.daySelected};
     }
 `;
 
 const DaysOfWeek = styled.div`
     display: flex;
-    gap: 5px;
     width: 100%;
-    padding: 8px 17px;
+    padding: 0.5em 1.0625em;
+    gap: 0.3125em;
 `;
 
 const Day = styled.button`
-    border: 1px solid #D5D5D5;
-    border-radius: 5px;
-    width: 30px;
-    height: 30px;
-    background: ${props => props.handleDay ? "#D5D5D5" : "#FFF"};
-    color: ${props => props.handleDay ? "#FFF" : "#D5D5D5"};
-    font-size: 20px;
+    width: 1.875em;
+    height: 1.875em;
+    border: 0.0625em solid ${COLOR.borderInput};
+    border-radius: 0.3125em;
+    color: ${props => props.handleDay ? COLOR.bgWhite : COLOR.daySelected};
+    font-size: 1.25em;
+    background: ${props => props.handleDay ? COLOR.daySelected : COLOR.bgWhite};
 
     pointer-events: ${props => props.disabled ? "none" : "default"};
 
     &:hover {
-        background: #F0F0F0;
+        background: ${COLOR.hoverDay};
     }
 `;
 
 const ButtonsBox = styled.div`
-    position: absolute;
-    right: 17px;
-    bottom: 15px;
     display: flex;
+    position: absolute;
+    right: 1.0625em;
+    bottom: 0.9375em;
 `;
 
 const SaveButton = styled.button`
-    width: 84px;
-    height: 35px;
-    background: #52B6FF;
-    color: #FFF;
-    border-radius: 5px;
+    width: 5.25em;
+    height: 2.1875em;
     border: none;
-    font-size: 16px;
+    border-radius: 0.3125em;
+    color: ${COLOR.bgWhite};
+    font-size: 1em;
+    background: ${COLOR.bgButton};
 
     &:hover {
-        background: #3E9ADE;
+        background: ${COLOR.hoverButton};
     }
 `;
 
 const CancelButton = styled(SaveButton)`
-    background: #FFF;
-    color: #52B6FF;
-    margin-right: 10px;
+    margin-right: 0.625em;
+    color: ${COLOR.bgButton};
+    background: ${COLOR.bgWhite};
 
     &:hover {
-        color: #3E9ADE;
-        background: #FFF;
+        color: ${COLOR.hoverButton};
+        background: ${COLOR.bgWhite};
     }
 `;
 
 const Overlay = styled.div`
     z-index: 1;
-    background: rgb(0, 0, 0, 0.2);
     position: fixed;
     top: 0;
-    left: 0;
     right: 0;
     bottom: 0;
+    left: 0;
+    background: ${COLOR.overlay};
 `;
 
 export { CreateOneHabit, Input, DaysOfWeek, Day, ButtonsBox, SaveButton, CancelButton, Overlay };

@@ -1,3 +1,4 @@
+import { COLOR } from '../../constants/Colors';
 import { LoginContext } from '../../contexts/LoginContext';
 import styled from 'styled-components';
 import { useContext } from 'react';
@@ -17,30 +18,30 @@ const Header = () => {
 
 const Container = styled.header`
     display: flex;
-    position: fixed;
     z-index: 3;
+    position: fixed;
     top: 0;
     justify-content: space-between;
     align-items: center;
-    width: 375px;
-    height: 70px;
-    padding: 0 17px;
-    background: #126BA5;
-    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.15);
+    width: 23.4375em;
+    height: 4.375em;
+    padding: 0 1.0625em;
     pointer-events: none;
+    background: ${COLOR.headerAndTitle};
+    box-shadow: 0em 0.25em 0.25em rgba(0, 0, 0, 0.15);
 
     h1 {
-        color: #fff;
-        font-size: 39px;
+        color: ${COLOR.bgWhite};
+        font-size: 2.4375em;
         font-family: 'Playball', cursive;
         pointer-events: none;
     }
 `;
 
 const IconUser = styled.img`
-    width: 51px;
-    height: 51px;
-    border-radius: 98.5px;  
+    width: 3.1875em;
+    height: 3.1875em;
+    border-radius: 6.15625em;  
 `;
 
 export default Header;

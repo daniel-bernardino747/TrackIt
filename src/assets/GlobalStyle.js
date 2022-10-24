@@ -1,3 +1,4 @@
+import { COLOR } from "../constants/Colors";
 import { createGlobalStyle } from "styled-components";
 
 export const GlobalStyle = createGlobalStyle`
@@ -56,10 +57,10 @@ export const GlobalStyle = createGlobalStyle`
         justify-content: center;
         width: 100vw;
         min-height: 100vh;
-        color: #000;
+        color: rgb(0, 0, 0);
         overflow-y: scroll;
         font-weight: 400;
         font-family: 'Lexend Deca', sans-serif;
-        background-color: #FFF;
+        background-color: ${COLOR.bgWhite};
     }
 `;

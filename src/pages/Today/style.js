@@ -1,69 +1,70 @@
+import { COLOR } from '../../constants/Colors';
 import styled from 'styled-components';
 
 const Container = styled.section`
     display: flex;
     flex-direction: column;
     align-items: center;
-    width: 375px;
+    width: 23.4375em;
     min-height: 100vh;
-    background: #E5E5E5;
+    background: ${COLOR.bgGray};
 `;
 const ProgressDay = styled.div`
     display: flex;
     flex-direction: column;
     width: 100%;
-    padding: 100px 20px 20px 20px;
-    gap: 5px;
+    padding: 6.25em 1.25em 1.25em 1.25em;
+    gap: 0.3125em;
 
     h1 {
-        color: #126BA5;
-        font-size: 23px;
+        color: ${COLOR.headerAndTitle};
+        font-size: 1.4375em;
     }
 `;
 const Subtitle = styled.p`
-    color: ${props => props.green ? "#8FC549" : "#BABABA"}; 
-    font-size: 18px;
+    color: ${props => props.green ? COLOR.bgGreen : COLOR.bgSubtitle}; 
+    font-size: 1.125em;
 `;
 const HabitsToDo = styled.div`
     display: flex;
     flex-direction: column;
-    gap: 10px;
+    gap: 0.625em;
 `;
 const HabitToDo = styled.div`
     display: flex;
     justify-content: space-between;
     align-items: center;
-    width: 340px;
-    min-height: 94px;
-    border-radius: 5px;
-    background: #FFF;
+    width: 21.25em;
+    min-height: 5.875em;
+    border-radius: 0.3125em;
+    background: ${COLOR.bgWhite};
 
     div {
-        padding: 15px;
+        padding: 0.9375em;
     }
     h1 {
-        margin-bottom: 8px;
-        color: #666;
-        font-size: 20px;
+        margin-bottom: 0.5em;
+        color: ${COLOR.text};
+        font-size: 1.25em;
     }
     p {
-        margin-bottom: 4px;
-        color: #666;
-        font-size: 13px;
+        margin-bottom: 0.25em;
+        color: ${COLOR.text};
+        font-size: 0.8125em;
     }
 `;
 const Span = styled.span`
-    color: ${props => props.green ? "#8FC549" : "#666"};
+    color: ${props => props.green ? COLOR.bgGreen : COLOR.text};
 `;
 const CheckHabit = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 69px;
-    height: 69px;
-    margin: 13px;
-    border-radius: 5px;
-    background: ${props => props.done ? "#8FC549" : "#EBEBEB"};
+    width: 4.3125em;
+    height: 4.3125em;
+    margin: 0.8125em;
+    border-radius: 0.3125em;
+    background: ${props => props.done ? COLOR.bgGreen : COLOR.bgUnchecked};
 
     &:hover {
         opacity: 0.8;
@@ -73,7 +74,7 @@ const CheckHabit = styled.div`
     }
 
     img {
-        width: 35px;
+        width: 2.1875em;
     }
 `;
 

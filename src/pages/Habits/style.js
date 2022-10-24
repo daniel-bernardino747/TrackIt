@@ -1,44 +1,45 @@
+import { COLOR } from '../../constants/Colors';
 import styled from 'styled-components';
 
 const Container = styled.div`
     display: flex;
     flex-direction: column;
     align-items: center;
-    width: 375px;
+    width: 23.4375em;
     min-height: 100vh;
-    background: #E5E5E5;
+    background: ${COLOR.bgGray};
 `;
 const CreateHabit = styled.div`
     display: flex;
     justify-content: space-between;
     width: 100%;
-    padding: 100px 20px 20px 20px;
-    color: #126BA5;
-    font-size: 23px;
+    padding: 6.25em 1.25em 1.25em 1.25em;
+    color: ${COLOR.headerAndTitle};
+    font-size: 1em;
 
     button {
-        width: 40px;
-        height: 30px;
+        width: 2.5em;
+        height: 1.875em;
         border: none;
-        border-radius: 5px;
-        color: #FFF;
+        border-radius: 0.3125em;
+        color: ${COLOR.bgWhite};
         font-weight: 700;
-        font-size: 20px;
-        background: #52B6FF;
+        font-size: 1.25em;
+        background: ${COLOR.bgButton};
 
         &:hover {
-            background: #3E9ADE;
+            background: ${COLOR.hoverButton};
         }
     }
 `;
 const BoxHabits = styled.div`
-    margin-bottom: 100px;
+    margin-bottom: 6.25em;
 `;
 const AlertHabit = styled.div`
-    margin: 0 20px;
-    color: #666;
-    font-size: 18px;
-    line-height: 22px;
+    margin: 0 1.25em;
+    color: ${COLOR.text};
+    font-size: 1.125em;
+    line-height: 1.375em;
 `;
 
 export { Container, BoxHabits, AlertHabit, CreateHabit };

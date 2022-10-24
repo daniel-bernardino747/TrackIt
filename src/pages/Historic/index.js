@@ -8,7 +8,7 @@ const Historic = () => {
         <Container>
             <Header />
 
-            <TitleHistoric>Histórico</TitleHistoric>
+            <TitleHistoric><p>Histórico</p></TitleHistoric>
 
             <Message>Em breve você poderá ver o histórico dos seus hábitos aqui!</Message>
 

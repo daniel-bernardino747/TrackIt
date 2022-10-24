@@ -1,3 +1,4 @@
+import { COLOR } from '../../constants/Colors';
 import { ThreeDots } from 'react-loader-spinner';
 import styled from 'styled-components';
 
@@ -24,18 +25,18 @@ const Loading = styled.div`
     justify-content: center ;
     align-items: center;
     border: none;
-    border-radius: 5px;
-    background: #52B6FF;
+    border-radius: 0.3125em;
+    background: ${COLOR.bgButton};
 
     ${props => props.small ? (
         `
-            width: 84px;
-            height: 35px;
+            width: 5.25em;
+            height: 2.1875em;
         `
     ) : (
         `
-            width: 303px;
-            height: 45px;
+            width: 18.9375em;
+            height: 2.8125em;
         `
     )}
 `;
